@@ -11,6 +11,7 @@ python = "^3.10"
 fastapi = {extras = ["all"], version = "^0.95.0"}
 pyzeebe = "^3.0.4"
 dependency-injector = "^4.41.0"
+gql = {extras = ["aiohttp"], version = "^3.4.0"}
 
 
 [build-system]

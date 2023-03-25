@@ -4,6 +4,7 @@ from dependency_injector import containers, providers
 from camunda_fastapi.settings import Settings 
 from pyzeebe import ZeebeClient, ZeebeWorker, create_camunda_cloud_channel
 from camunda_fastapi.workers import create_tasks
+from camunda_fastapi.tasklist_client import TasklistClient
 
 def create_channel(settings: Settings) -> grpc.aio.Channel:
     channel = create_camunda_cloud_channel(client_id=settings.client_id, client_secret=settings.client_secret,
@@ -18,6 +19,9 @@ def create_worker(channel: grpc.aio.Channel) -> ZeebeWorker:
     worker = ZeebeWorker(grpc_channel=channel)
     create_tasks(worker)
     return worker;
+        
+def create_tasklist_client(settings: Settings) -> TasklistClient:
+    return TasklistClient(settings=settings)
     
 class ZeebeContainer(containers.DeclarativeContainer):
     """Dependency Injection container"""
@@ -35,4 +39,8 @@ class ZeebeContainer(containers.DeclarativeContainer):
     zeebe_worker: providers.Provider[ZeebeWorker] = providers.ThreadLocalSingleton(
         create_worker,
         channel=channel,
+    )
+    tasklist_client: providers.Provider[TasklistClient] = providers.ThreadLocalSingleton(
+        create_tasklist_client,
+        settings=settings,
     )
