@@ -1,9 +1,9 @@
 import grpc
 from dependency_injector import containers, providers
 
-from settings import Settings 
+from camunda_fastapi.settings import Settings 
 from pyzeebe import ZeebeClient, ZeebeWorker, create_camunda_cloud_channel
-from workers import create_tasks
+from camunda_fastapi.workers import create_tasks
 
 def create_channel(settings: Settings) -> grpc.aio.Channel:
     channel = create_camunda_cloud_channel(client_id=settings.client_id, client_secret=settings.client_secret,

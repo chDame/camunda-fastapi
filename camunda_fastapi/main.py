@@ -1,3 +1,4 @@
+import uvicorn
 import asyncio
 
 from asyncio import sleep
@@ -6,8 +7,8 @@ from typing import Callable
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-import endpoints
-from zeebe_containers import ZeebeContainer
+from camunda_fastapi import endpoints
+from camunda_fastapi.zeebe_containers import ZeebeContainer
 from pyzeebe import ZeebeWorker
 
 
@@ -47,3 +48,7 @@ def create_app() -> App:
     
     
 app = create_app()
+
+def start():
+    """Launched with `poetry run start` at root level"""
+    uvicorn.run("camunda_fastapi.main:app", host="0.0.0.0", port=8000, reload=True)

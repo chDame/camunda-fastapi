@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "camunda-fastapi"
+version = "0.1.0"
+description = ""
+authors = ["Christophe <christophe.dame@camunda.com>"]
+readme = "README.md"
+packages = [{include = "camunda_fastapi"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.95.0"}
+pyzeebe = "^3.0.4"
+dependency-injector = "^4.41.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "camunda_fastapi.main:start"

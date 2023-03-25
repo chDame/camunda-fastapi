@@ -2,7 +2,7 @@
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, HTTPException
 
-from zeebe_containers import ZeebeContainer
+from camunda_fastapi.zeebe_containers import ZeebeContainer
 from pyzeebe import ZeebeClient
 
 router = APIRouter()

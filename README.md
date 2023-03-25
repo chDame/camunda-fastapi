@@ -6,27 +6,19 @@
 
 This project is designed to show how to use [pyzeebe](https://pyzeebe.readthedocs.io/en/stable/index.html) with FastAPI. This project is a draft.
 
+# Install poetry and activate virtual env
+
+##Install poetry
+```
+https://python-poetry.org/docs/
+```
+
+## activate virtual env
+```
+poetry shell
+```
+
 # Run the application
 ```
-uvicorn main:app --reload
-```
-
-# Install
-
-Create and use virtual environment
-```
-python -m venv venv
-.\venv\Scripts\activate
-```
-Install Fast API
-```
-pip install "fastapi[all]"
-```
-Install pyzeebe
-```
-pip install pyzeebe
-```
-Install dependency_injector
-```
-pip install dependency_injector
+poetry run start
 ```
