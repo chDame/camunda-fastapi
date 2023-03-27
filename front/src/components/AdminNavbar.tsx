@@ -85,7 +85,7 @@ function AdminNavbar() {
             <NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
             } to="/admin/forms">{t("Forms")}</NavLink>
-            <NavLink className={({ isActive }) =>
+            {false ? <><NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
             } to="/admin/mails">{t("Emails")}</NavLink>
             <NavLink className={({ isActive }) =>
@@ -93,17 +93,17 @@ function AdminNavbar() {
             } to="/admin/feel">{t("Feel Tester")}</NavLink>
             <NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
-            } to="/admin/dmn">{t("DMN")}</NavLink>
+            } to="/admin/dmn">{t("DMN")}</NavLink></> : <></>}
             <NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
             } to="/admin/templates">{t("Templates")}</NavLink>
-            {orgEnabled && user!.profile === 'Admin' ?
+            {false && orgEnabled && user!.profile === 'Admin' ?
               <NavLink className={({ isActive }) =>
                 isActive ? "text-light menu-item selected" : "text-light menu-item"
               } to="/admin/users">{t("Users")}</NavLink>
               : <></>
             }
-            {user!.profile === 'Admin' ?
+            {false && user!.profile === 'Admin' ?
               <>
                 <NavLink className={({ isActive }) =>
                   isActive ? "text-light menu-item selected" : "text-light menu-item"
@@ -111,7 +111,7 @@ function AdminNavbar() {
                 <NavLink className={({ isActive }) =>
                   isActive ? "text-light menu-item selected" : "text-light menu-item"
                 } to="/admin/translations">{t("Internationalization")}</NavLink>
-              </>
+			  </>
               : <></>
             }
           </div>
