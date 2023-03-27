@@ -85,7 +85,7 @@ function AdminNavbar() {
             <NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
             } to="/admin/forms">{t("Forms")}</NavLink>
-            {false ? <><NavLink className={({ isActive }) =>
+            {false ?  <><NavLink className={({ isActive }) =>
               isActive ? "text-light menu-item selected" : "text-light menu-item"
             } to="/admin/mails">{t("Emails")}</NavLink>
             <NavLink className={({ isActive }) =>
