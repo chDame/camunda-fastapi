@@ -4,6 +4,7 @@ import requests
 from camunda_fastapi.settings import Settings 
 from requests.auth import HTTPBasicAuth
 import json
+import xml.etree.ElementTree as ET
 
 class OperateClient:
     def __init__(self, *, settings: Settings):
@@ -24,3 +25,10 @@ class OperateClient:
                 result.append(definition)
                 lastDefId=definition["bpmnProcessId"]
         return result
+
+    def embedded_form(self, processDefinitionId:str, formId:str):
+        headers={"Authorization": "Bearer "+self.token}
+        response = requests.get('https://bru-2.operate.camunda.io/'+self.settings.cluster_id+'/v1/process-definitions/'+processDefinitionId+'/xml', headers=headers)
+        xml = response.text
+        tree = ET.ElementTree(ET.fromstring(xml))
+        return json.loads(tree.getroot().find("./*/*/*[@id='"+formId+"']").text)

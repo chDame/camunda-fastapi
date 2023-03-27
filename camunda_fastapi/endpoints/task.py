@@ -3,7 +3,7 @@ from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, HTTPException
 
 from camunda_fastapi.zeebe_containers import ZeebeContainer
-from camunda_fastapi.tasklist_client import TasklistClient
+from camunda_fastapi.c8clients.tasklist_client import TasklistClient
 from pyzeebe import ZeebeClient
 
 router = APIRouter()

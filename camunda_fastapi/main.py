@@ -7,7 +7,7 @@ from typing import Callable
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from camunda_fastapi.endpoints import process, task
+from camunda_fastapi.endpoints import process, task, form
 from camunda_fastapi.zeebe_containers import ZeebeContainer
 from pyzeebe import ZeebeWorker
 
@@ -19,11 +19,13 @@ class App(FastAPI):
         container = container_factory()
         container.wire(modules=[process])
         container.wire(modules=[task])
+        container.wire(modules=[form])
 
         super().__init__()
         self.container = container
         self.include_router(process.router)
         self.include_router(task.router)
+        self.include_router(form.router)
         #self.mount('/webui', StaticFiles(directory='webui/public', html=True), name='static')
 
 
