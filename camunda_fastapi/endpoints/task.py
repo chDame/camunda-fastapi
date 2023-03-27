@@ -19,7 +19,13 @@ async def tasks(tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer
 async def tasks(task_id:int, tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
     tasks = await tasklist_client.claim(task_id=task_id, assignee="python")
     return tasks;
-
+    
+@router.get('/api/tasks/{task_id}/unclaim')
+@inject
+async def tasks(task_id:int, tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
+    tasks = await tasklist_client.unclaim(task_id=task_id)
+    return tasks;
+    
 @router.post('/api/tasks/{task_id}')
 @inject
 async def tasks(task_id:int, variables:dict, tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
