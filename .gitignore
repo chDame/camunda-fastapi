@@ -1,0 +1,9 @@
+### VS Code ###
+.vscode/
+workspace.code-workspace
+
+
+### React Js ###
+front/.vs
+front/node_modules
+front/build

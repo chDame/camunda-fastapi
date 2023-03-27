@@ -1713,4 +1713,4 @@ protobuf = ">=3,<4"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "971d549d90dd4b8fb5543e9a99b6f2c17eb3e3370771144230cfa0c1e3caf451"
+content-hash = "93d2acbb11248a6f8008f0efa503f396b5f3c3dea733d866081c9b84261a04e2"

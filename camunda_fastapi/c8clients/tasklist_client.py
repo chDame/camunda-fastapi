@@ -79,7 +79,7 @@ class TasklistClient:
                     completeTask(taskId: $taskId, variables: $variables) {
                         id
                         taskState
-                            variables {
+                        variables {
                             name
                             value
                             __typename
@@ -121,6 +121,8 @@ class TasklistClient:
                         id
                         name
                         processName
+                        processDefinitionId
+                        formKey
                         assignee
                         creationTime
                         taskState

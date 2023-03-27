@@ -1,0 +1,22 @@
+{
+  "name" : "connectorsprocess",
+  "modified" : 1674815772519,
+  "schema" : {
+    "components" : [ {
+      "label" : "Text Field",
+      "type" : "textfield",
+      "id" : "Field_0ashj0e",
+      "key" : "field_1y10gk8"
+    } ],
+    "schemaVersion" : 4,
+    "type" : "default",
+    "id" : "Form_9930388",
+    "executionPlatform" : "Camunda Cloud",
+    "executionPlatformVersion" : "1.1",
+    "exporter" : {
+      "name" : "Camunda Modeler",
+      "version" : "5.0.0"
+    }
+  },
+  "previewData" : { }
+}

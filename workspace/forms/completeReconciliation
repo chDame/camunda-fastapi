@@ -1,0 +1,94 @@
+{
+  "name" : "completeReconciliation",
+  "modified" : 1671017588450,
+  "schema" : {
+    "components" : [ {
+      "label" : "Transfer Key",
+      "type" : "textfield",
+      "id" : "Field_0yil46t",
+      "key" : "transferKey",
+      "disabled" : true
+    }, {
+      "label" : "Customer",
+      "type" : "textfield",
+      "id" : "Field_15ud8hl",
+      "key" : "customerName",
+      "disabled" : true
+    }, {
+      "label" : "Amount",
+      "type" : "number",
+      "id" : "Field_17uzgn3",
+      "key" : "amount",
+      "disabled" : true
+    }, {
+      "label" : "Automatic transfer",
+      "type" : "checkbox",
+      "id" : "Field_1pi2l73",
+      "key" : "automatic",
+      "disabled" : true
+    }, {
+      "label" : "EDI",
+      "type" : "checkbox",
+      "id" : "Field_1o5v46i",
+      "key" : "edi",
+      "disabled" : true
+    }, {
+      "label" : "Comments",
+      "type" : "table",
+      "id" : "Field_1w77yn5",
+      "key" : "comments",
+      "headers" : "comment, author",
+      "headersNames" : "Comment, Author"
+    }, {
+      "label" : "Tax code",
+      "type" : "textfield",
+      "id" : "Field_0ph3w6o",
+      "key" : "taxCode",
+      "validate" : {
+        "required" : false
+      },
+      "disabled" : true
+    }, {
+      "label" : "Can be place",
+      "type" : "checkbox",
+      "id" : "Field_0v4zxrq",
+      "key" : "canBePlaced"
+    }, {
+      "label" : "Justification",
+      "type" : "fileUpload",
+      "id" : "Field_1vslyaf",
+      "key" : "justification",
+      "targetApi" : "/api/file/upload",
+      "targetApiVerb" : "POST",
+      "displayFileUpload" : true,
+      "displayFileViewer" : true,
+      "fileSource" : "'/api/file/serve/'+value.reference",
+      "viewerBackdrop" : "modal-backdrop",
+      "viewerClass" : "modal-dialog",
+      "viewerHeaderClass" : "modal-header",
+      "viewerHeaderTitle" : "File viewer",
+      "iFrameClass" : "modal-body",
+      "validate" : {
+        "required" : true
+      }
+    }, {
+      "label" : "Comment",
+      "type" : "textfield",
+      "id" : "Field_10aac2j",
+      "key" : "newComment",
+      "validate" : {
+        "required" : true
+      }
+    } ],
+    "schemaVersion" : 4,
+    "type" : "default",
+    "id" : "Form_2915757",
+    "executionPlatform" : "Camunda Cloud",
+    "executionPlatformVersion" : "1.1",
+    "exporter" : {
+      "name" : "Camunda Modeler",
+      "version" : "5.0.0"
+    }
+  },
+  "previewData" : { }
+}

@@ -13,6 +13,12 @@ router = APIRouter()
 async def tasks(tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
     tasks = await tasklist_client.read_tasks()
     return tasks;
+    
+@router.post('/api/tasks/search')
+@inject
+async def tasks(tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
+    tasks = await tasklist_client.read_tasks()
+    return tasks;   
  
 @router.get('/api/tasks/{task_id}/claim')
 @inject
@@ -31,3 +37,4 @@ async def tasks(task_id:int, tasklist_client: TasklistClient = Depends(Provide[Z
 async def tasks(task_id:int, variables:dict, tasklist_client: TasklistClient = Depends(Provide[ZeebeContainer.tasklist_client])) -> None:
     tasks = await tasklist_client.complete(task_id=task_id, variables=variables)
     return tasks;
+    

@@ -1,0 +1,37 @@
+{
+  "name" : "event-diary",
+  "modified" : 1675183185231,
+  "schema" : {
+    "components" : [ {
+      "label" : "Event Id",
+      "type" : "textfield",
+      "id" : "Field_0psh22w",
+      "key" : "eventId"
+    }, {
+      "label" : "Event type",
+      "type" : "textfield",
+      "id" : "Field_0617k64",
+      "key" : "eventType"
+    }, {
+      "label" : "Location",
+      "type" : "textfield",
+      "id" : "Field_1f9cr9i",
+      "key" : "location"
+    }, {
+      "label" : "Event Status",
+      "type" : "textfield",
+      "id" : "Field_0ex5s70",
+      "key" : "eventStatus"
+    } ],
+    "schemaVersion" : 4,
+    "type" : "default",
+    "id" : "Form_5493723",
+    "executionPlatform" : "Camunda Cloud",
+    "executionPlatformVersion" : "1.1",
+    "exporter" : {
+      "name" : "Camunda Modeler",
+      "version" : "5.0.0"
+    }
+  },
+  "previewData" : { }
+}

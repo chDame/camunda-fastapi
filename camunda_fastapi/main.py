@@ -4,10 +4,10 @@ import asyncio
 from asyncio import sleep
 from typing import Callable
 
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 
-from camunda_fastapi.endpoints import process, task, form
+from camunda_fastapi.endpoints import process, task, form, authentication
 from camunda_fastapi.zeebe_containers import ZeebeContainer
 from pyzeebe import ZeebeWorker
 
@@ -17,16 +17,18 @@ class App(FastAPI):
 
     def __init__(self, container_factory: Callable[[], ZeebeContainer] = ZeebeContainer):
         container = container_factory()
+        container.wire(modules=[authentication])
         container.wire(modules=[process])
         container.wire(modules=[task])
         container.wire(modules=[form])
 
         super().__init__()
         self.container = container
+        self.include_router(authentication.router)
         self.include_router(process.router)
         self.include_router(task.router)
         self.include_router(form.router)
-        #self.mount('/webui', StaticFiles(directory='webui/public', html=True), name='static')
+        self.mount('/', StaticFiles(directory='front/build', html=True), name='static')
 
 
 def create_app() -> App:
@@ -52,6 +54,15 @@ def create_app() -> App:
     
     
 app = create_app()
+
+
+    
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        await websocket.send_text(f"Message text was: {data}")
 
 def start():
     """Launched with `poetry run start` at root level"""
