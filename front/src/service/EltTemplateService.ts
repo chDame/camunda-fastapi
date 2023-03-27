@@ -31,6 +31,10 @@ export class EltTemplateService {
     let { data } = await api.get('/elttemplates/' + worker);
     return data;
   }
+  newEltTemplate = async (worker: string): Promise<any> => {
+    let { data } = await api.get('/elttemplates/new/' + worker);
+    return data;
+  }
   saveTemplate = async (worker: string|null, template: any): Promise<any> => {
     api.post('/elttemplates/' + worker, template).then(response => {
     }).catch(error => {

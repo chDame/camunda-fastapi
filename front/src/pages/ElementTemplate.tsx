@@ -287,7 +287,6 @@ function ElementTemplate() {
     setTemplateValue(copy);
   }
   const download = () => {
-
     let url = window.URL.createObjectURL(new Blob([JSON.stringify(templateValue, null, 2)], { type: "application/json" }));
     const a = document.createElement('a');
     a.style.display = 'none';
@@ -296,7 +295,6 @@ function ElementTemplate() {
     a.click();
     window.URL.revokeObjectURL(url);
     a.remove();
-
   }
   const loadEltTemplate = async () => {
     let url = window.location.href;
