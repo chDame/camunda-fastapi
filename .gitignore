@@ -7,3 +7,7 @@ workspace.code-workspace
 front/.vs
 front/node_modules
 front/build
+
+### google auth ###
+client_secret_google_api.json
+token.json

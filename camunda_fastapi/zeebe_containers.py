@@ -4,6 +4,7 @@ from dependency_injector import containers, providers
 from camunda_fastapi.settings import Settings 
 from pyzeebe import ZeebeClient, ZeebeWorker, create_camunda_cloud_channel
 from camunda_fastapi.workers import create_tasks
+from camunda_fastapi.mail_worker import create_mail_task
 from camunda_fastapi.c8clients.tasklist_client import TasklistClient
 from camunda_fastapi.c8clients.operate_client import OperateClient
 
@@ -19,6 +20,7 @@ def create_client(channel: grpc.aio.Channel) -> ZeebeClient:
 def create_worker(channel: grpc.aio.Channel) -> ZeebeWorker:
     worker = ZeebeWorker(grpc_channel=channel)
     create_tasks(worker)
+    create_mail_task(worker)
     return worker;
         
 def create_tasklist_client(settings: Settings) -> TasklistClient:
