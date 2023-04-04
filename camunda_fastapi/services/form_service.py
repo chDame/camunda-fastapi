@@ -2,13 +2,16 @@ import os
 import json
 import datetime
 
-formsPath = "workspace/forms/";
+path = "workspace/forms/";
 
 def resolve_form(name:str) -> str:
-    return formsPath+name
+    return path+name
 
 def find_names() -> list:
-    return os.listdir(formsPath)
+    isExist = os.path.exists(path)
+    if not isExist:
+        os.makedirs(path)
+    return os.listdir(path)
 
 def find_by_name(formKey:str) -> dict:
     f = open(resolve_form(formKey))
@@ -19,7 +22,7 @@ def find_by_name(formKey:str) -> dict:
     return data
 
 def save_form(form:dict) -> dict:
-    form["modified"] = datetime.datetime.now()
+    form["modified"] = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     json_object = json.dumps(form, indent=4)
     with open(resolve_form(form["name"]), "w") as outfile:
         outfile.write(json_object)

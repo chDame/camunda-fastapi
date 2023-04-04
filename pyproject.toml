@@ -13,6 +13,7 @@ pyzeebe = "^3.0.4"
 dependency-injector = "^4.41.0"
 gql = {extras = ["aiohttp"], version = "^3.4.0"}
 websockets = "^10.4"
+chevron = "^0.14.0"
 
 
 [build-system]

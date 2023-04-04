@@ -6,11 +6,16 @@ from typing import Callable
 
 from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
-from camunda_fastapi.endpoints import process, task, form, authentication, elt_template
+from camunda_fastapi.endpoints import process, task, form, mail, authentication, elt_template
 from camunda_fastapi.zeebe_containers import ZeebeContainer
 from pyzeebe import ZeebeWorker
 
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8000"
+]
 
 class App(FastAPI):
     """A FastAPI application"""
@@ -21,6 +26,7 @@ class App(FastAPI):
         container.wire(modules=[process])
         container.wire(modules=[task])
         container.wire(modules=[form])
+        container.wire(modules=[mail])
         container.wire(modules=[elt_template])
 
         super().__init__()
@@ -29,6 +35,7 @@ class App(FastAPI):
         self.include_router(process.router)
         self.include_router(task.router)
         self.include_router(form.router)
+        self.include_router(mail.router)
         self.include_router(elt_template.router)
         self.mount('/', StaticFiles(directory='front/build', html=True), name='static')
 
@@ -36,6 +43,13 @@ class App(FastAPI):
 def create_app() -> App:
     """A FastAPI app factory"""
     app = App()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     zeebe_worker: ZeebeWorker = app.container.zeebe_worker.provided()
     running: boolean = True
     async def stop_workers():

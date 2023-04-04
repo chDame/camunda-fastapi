@@ -42,6 +42,9 @@ const adminMailsSlice = createSlice({
     setHtmlTemplate: (state: AdminMailsState, action: PayloadAction<string>) => {
       state.currentMail.htmlTemplate = action.payload;
     },
+    setPreviewData: (state: AdminMailsState, action: PayloadAction<string>) => {
+      state.currentMail.previewData = action.payload;
+    },
   },
 });
 
@@ -51,6 +54,7 @@ export const {
   setCurrentMail,
   setMailName,
   setHtmlTemplate,
+  setPreviewData,
   fail,
   silentfail
 } = adminMailsSlice.actions;
