@@ -23,11 +23,24 @@ Configurations are handled in the .env file where you'll need to see cluster_id,
 If you want to use google services (as gmail), you should download a google JSON credential files named client_secret_google_api.json at the root of your project. Else, you should comment the code using it. Google documentation is available here : https://support.google.com/cloud/answer/6158849?hl=en
 
 # Run the application
+
+## Install dependencies
+If you just cloned that repository, you should also install dependencies
+```
+poetry install
+```
+
+## Build the front
+The python project serve the front-end. So you need to build it
+```
+cd front
+npm install
+npm run build
+```
+
+## Execute full application
 ```
 poetry run start
 ```
 
-If you just cloned that repository, you should also install dependencies :
-```
-poetry install
-```
+
