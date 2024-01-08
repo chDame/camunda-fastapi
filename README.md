@@ -20,8 +20,14 @@ poetry shell
 ```
 # Configure application
 Configurations are handled in the .env file where you'll need to see cluster_id, client_id and client_secret.
+If you want to use google services (as gmail), you should download a google JSON credential files named client_secret_google_api.json at the root of your project. Else, you should comment the code using it. Google documentation is available here : https://support.google.com/cloud/answer/6158849?hl=en
 
 # Run the application
 ```
 poetry run start
+```
+
+If you just cloned that repository, you should also install dependencies :
+```
+poetry install
 ```
