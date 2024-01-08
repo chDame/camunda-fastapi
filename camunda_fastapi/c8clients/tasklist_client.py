@@ -101,49 +101,8 @@ class TasklistClient:
             result = await session.execute(query, variable_values=params)
 
     async def read_tasks(self):
-        transport = AIOHTTPTransport(url="https://bru-2.tasklist.camunda.io/"+self.settings.cluster_id+"/graphql",
-        headers={'Authorization': 'Bearer '+self.token})
-
-        # Using `async with` on the client will start a connection on the transport
-        # and provide a `session` variable to execute queries on this connection
-        async with Client(
-            transport=transport,
-            fetch_schema_from_transport=True,
-        ) as session:
-
-            # Execute single query
-            query = gql(
-                """
-                query GetTasks($assignee: String, $assigned: Boolean, $state: TaskState, $pageSize: Int, $searchAfter: [String!], $searchBefore: [String!], $searchAfterOrEqual: [String!]) {
-                    tasks(
-                        query: {assignee: $assignee, assigned: $assigned, state: $state, pageSize: $pageSize, searchAfter: $searchAfter, searchBefore: $searchBefore, searchAfterOrEqual: $searchAfterOrEqual}
-                    ) {
-                        id
-                        name
-                        processName
-                        processDefinitionId
-                        formKey
-                        assignee
-                        creationTime
-                        taskState
-                        sortValues
-                        isFirst
-                        __typename
-                        variables {
-                            id
-                            name
-                            value
-                            previewValue
-                            isValueTruncated
-                            __typename
-                        }
-                    }
-                }
-            """
-            )
-            params = {
-                "state": "CREATED"
-            }
-            result = await session.execute(query, variable_values=params)
-
-            return result["tasks"]
+        search={"state": "CREATED"}
+        headers={"Authorization": "Bearer "+self.token, "Content-Type":"application/json"}
+        response = requests.post('https://bru-2.tasklist.camunda.io/'+self.settings.cluster_id+'/v1/tasks/search', headers=headers, data=json.dumps(search), verify=True)
+        
+        return response.json();

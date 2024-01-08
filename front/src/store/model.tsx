@@ -19,7 +19,7 @@ export interface ITask {
   id: number;
   name: string;
   processName: string;
-  creationTime: string;
+  creationDate: string;
   assignee: string | null;
   candidateGroups: string[];
   taskState: string;
