@@ -32,3 +32,23 @@ class OperateClient:
         xml = response.text
         tree = ET.ElementTree(ET.fromstring(xml))
         return json.loads(tree.getroot().find("./*/*/*[@id='"+formId+"']").text)
+        
+
+    def embedded_start_form(self, processDefinitionId:str):
+        headers={"Authorization": "Bearer "+self.token}
+        response = requests.get('https://bru-2.operate.camunda.io/'+self.settings.cluster_id+'/v1/process-definitions/'+processDefinitionId+'/xml', headers=headers)
+        xml = response.text
+        tree = ET.ElementTree(ET.fromstring(xml))
+        print(tree)
+        ns = {'bpmn': 'http://www.omg.org/spec/BPMN/20100524/MODEL',
+              'zeebe': 'http://camunda.org/schema/zeebe/1.0'}
+        startEventsForms = tree.getroot().findall("bpmn:process/bpmn:startEvent/bpmn:extensionElements/zeebe:formDefinition[@formKey]", ns)
+        if not startEventsForms:
+          return None
+
+        formKey = startEventsForms[0].attrib["formKey"]
+        if formKey is None:
+          return None
+       
+        formId = formKey[formKey.rindex(":") + 1:]
+        return json.loads(tree.getroot().find("./*/*/*[@id='"+formId+"']").text)
