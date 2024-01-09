@@ -48,8 +48,19 @@ def localized_form_schema(processName:str, processDefinitionId:str, formKey:str,
     
     return schema
   
-@router.get("/api/forms/instanciation/{bpmnProcessId}")
+@router.get("/api/instanciation/{bpmnProcessId}")
 def getInstanciationFormSchema(bpmnProcessId:str) -> None:
+    form = form_service.find_by_name(bpmnProcessId);
+    schema = form["schema"]
+    schema["generator"] = form["generator"]
+    return schema
+
+@router.get("/api/instanciation/{bpmnProcessId}/{processDefId}")
+@inject
+async def getInstanciationFormSchema(bpmnProcessId:str, processDefId:str, operate_client: OperateClient = Depends(Provide[ZeebeContainer.operate_client])) -> None:
+    schema = operate_client.embedded_start_form(processDefId)
+    if schema is not None:
+      return schema
     form = form_service.find_by_name(bpmnProcessId);
     schema = form["schema"]
     schema["generator"] = form["generator"]
