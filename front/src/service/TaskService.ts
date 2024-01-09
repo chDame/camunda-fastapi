@@ -67,8 +67,13 @@ export class TaskService {
   }
   setTask = (task: ITask | null): AppThunk => async dispatch => {
     if (task) {
+      const { data } = await api.get<any[]>('/tasks/'+task.id+'/variables');
+      task = Object.assign({}, task);
+      task.variables = {};
+      for(let i=0;i<data.length;i++) {
+        task.variables[data[i].name] = JSON.parse(data[i].value);
+      }
       if (task.formKey === "processVariableFormKey") {
-        task = Object.assign({}, task);
         task.formKey = task.variables.formKey;
       }
       if (!formService.customFormExists(task.formKey)) {
